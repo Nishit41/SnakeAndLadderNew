@@ -7,9 +7,11 @@ package com.bridgelabz.basics;
         static final int LADDER = 3;
         static final int WINNINGPOSITION = 100;
         static final int INITIALPOSITION = 0;
+        static int dieCount=0;
         static int dieRoll(){
-        return (int)(Math.random()*10)%6+1;
-    }
+            dieCount++;
+            return (int)(Math.random()*10)%6+1;
+        }
     static int getOption(){
         return (int)(Math.random()*10)%3+1;
     }
@@ -22,19 +24,23 @@ package com.bridgelabz.basics;
             switch (option) {
                 case SNAKE:
                     position -= dieNum;
-                    if(position < 0 )
+                    if(position < INITIALPOSITION )
                     {
                       position = INITIALPOSITION;
                     }
                     break;
                 case LADDER:
-                    position += dieNum;
+                    if(position+dieNum < WINNINGPOSITION )
+                    {
+                        position += dieNum;
+                    }
                     break;
                 case NO_PLAY:
                     break;
                 default:
              }
+            System.out.println("position after everydieRoll"+" "+position);
          }
-
-    }
+        System.out.println("diecount"+" "+dieCount);
+        }
 }
